@@ -1,9 +1,8 @@
 package com.enoca.payload.request;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+
+import lombok.*;
+
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -11,7 +10,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
+@Builder
 public class ProductRequest {
 
     @NotNull(message = "Product name can not be null")
@@ -25,7 +25,5 @@ public class ProductRequest {
     @DecimalMin(value = "0.0", message = "Product quantity can not be smaller than zero")
     private Integer stockQuantity;
 
-    @NotNull(message = "Stock can not be null")
-    private Boolean isInStock;
 
 }

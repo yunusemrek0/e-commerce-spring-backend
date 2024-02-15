@@ -6,8 +6,6 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -18,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_order")
-public class Order extends BaseEntity{
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +31,9 @@ public class Order extends BaseEntity{
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<CartItem> cartItem;
 
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     private String code;
+
+    private LocalDateTime creationDate;
 
 }

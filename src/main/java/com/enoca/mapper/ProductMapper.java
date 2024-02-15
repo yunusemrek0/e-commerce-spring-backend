@@ -8,10 +8,13 @@ import com.enoca.payload.response.CustomerResponse;
 import com.enoca.payload.response.ProductResponse;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class ProductMapper {
 
     public ProductResponse mapProductToProductResponse(Product product){
+        /*
         ProductResponse productResponse = new ProductResponse();
 
         productResponse.setName(product.getName());
@@ -19,6 +22,15 @@ public class ProductMapper {
         productResponse.setStockQuantity(product.getStockQuantity());
 
         return productResponse;
+
+         */
+
+        return ProductResponse.builder()
+                .name(product.getName())
+                .price(product.getPrice())
+                .stockQuantity(product.getStockQuantity())
+                .creationDate(product.getCreationDate())
+                .build();
     }
 
     public Product mapProductRequestToProduct(ProductRequest productRequest){
@@ -27,7 +39,7 @@ public class ProductMapper {
                 .name(productRequest.getName())
                 .price(productRequest.getPrice())
                 .stockQuantity(productRequest.getStockQuantity())
-                .isInStock(productRequest.getIsInStock())
+                .creationDate(LocalDateTime.now())
                 .build();
     }
 

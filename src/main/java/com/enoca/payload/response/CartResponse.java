@@ -1,19 +1,19 @@
 package com.enoca.payload.response;
 
+import com.enoca.payload.response.abstractresponse.BaseAbstractResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CartResponse {
+public class CartResponse extends BaseAbstractResponse {
 
     private String customerName;
     private Double totalPrice;

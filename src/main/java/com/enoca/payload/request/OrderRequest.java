@@ -1,17 +1,20 @@
 package com.enoca.payload.request;
 
-import com.enoca.entity.Cart;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Builder
-@Data
+import com.enoca.payload.request.abstractrequest.BaseAbstractRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import javax.validation.constraints.NotNull;
+
+@SuperBuilder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderRequest {
+public class OrderRequest extends BaseAbstractRequest {
 
+    @NotNull(message = "Please enter customerId")
     private Long customerId;
 
 }

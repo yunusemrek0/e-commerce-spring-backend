@@ -17,6 +17,7 @@ public class CustomerMapper {
                 .name(customer.getName())
                 .lastName(customer.getLastName())
                 .email(customer.getEmail())
+                .creationDate(customer.getCreationDate())
                 .build();
 
     }
@@ -28,6 +29,7 @@ public class CustomerMapper {
                 .name(customerRequest.getName())
                 .lastName(customerRequest.getLastName())
                 .email(customerRequest.getEmail())
+                .creationDate(customerRequest.getCreationDate())
                 .build();
     }
 

@@ -1,20 +1,20 @@
 package com.enoca.payload.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.enoca.payload.request.abstractrequest.BaseAbstractRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Builder
-@Data
+@SuperBuilder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerRequest {
+public class CustomerRequest extends BaseAbstractRequest {
 
     @NotNull(message = "Please enter your username")
     @Size(min = 3, max = 16,message = "Your username should be between {min} and {max} chars")

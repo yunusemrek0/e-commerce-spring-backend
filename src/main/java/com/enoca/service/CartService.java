@@ -10,19 +10,17 @@ import com.enoca.mapper.CartMapper;
 import com.enoca.message.ErrorMessages;
 import com.enoca.message.SuccessMessages;
 import com.enoca.payload.request.CartItemRequest;
-import com.enoca.payload.request.CartRequest;
 import com.enoca.payload.response.CartItemResponse;
 import com.enoca.payload.response.CartResponse;
 import com.enoca.payload.response.ResponseMessage;
 import com.enoca.repository.CartItemRepository;
 import com.enoca.repository.CartRepository;
-import com.enoca.repository.CustomerRepository;
 import com.enoca.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -32,35 +30,10 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CustomerService customerService;
     private final CartMapper cartMapper;
-    private final CustomerRepository customerRepository;
-    private final ProductService productService;
     private final CartItemMapper cartItemMapper;
     private final CartItemRepository cartItemRepository;
     private final ProductHelper productHelper;
 
-
-    public ResponseMessage<CartResponse> saveCart(CartRequest cartRequest) {
-
-        Customer customer = customerService.existsById(cartRequest.getCustomerId());
-
-        Cart cart = new Cart();
-        cart.setTotalPriceInCart(0.00);
-        cart.setCustomer(customer);
-
-
-        Cart savedCart=cartRepository.save(cart);
-
-        customer.setCart(savedCart);
-        customerRepository.save(customer);
-
-
-
-        return ResponseMessage.<CartResponse>builder()
-                .message(SuccessMessages.CART_CREATE)
-                .returnBody(cartMapper.mapCartToCartResponse(savedCart))
-                .build();
-
-    }
 
     //add helper
     public Cart existById(Long id){
@@ -69,14 +42,12 @@ public class CartService {
         );
     }
 
-
     public CartResponse getByCustomerId(Long customerId) {
 
         Customer customer = customerService.existsById(customerId);
 
         return cartMapper.mapCartToCartResponse(customer.getCart());
     }
-
 
 
     public ResponseMessage<CartItemResponse> addCartItemToCart(Long cartId, CartItemRequest cartItemRequest) {

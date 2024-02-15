@@ -21,9 +21,10 @@ public class OrderMapper {
 
     private final CartService cartService;
     private final CartItemMapper cartItemMapper;
-    private final CartItemService cartItemService;
 
-    public Order mapOrderRequestToOrder(Customer customer,
+
+    public Order mapOrderRequestToOrder(OrderRequest orderRequest,
+                                        Customer customer,
                                         List<CartItem> cartItems,
                                         String code){
 
@@ -32,6 +33,7 @@ public class OrderMapper {
                 .cartItem(cartItems)
                 .customer(customer)
                 .totalPrice(cartService.cartTotalPriceCalculator(cartItems))
+                .creationDate(orderRequest.getCreationDate())
                 .build();
     }
 
@@ -41,7 +43,11 @@ public class OrderMapper {
                 .totalPrice(order.getTotalPrice())
                 .code(order.getCode())
                 .customerName(order.getCustomer().getName())
-                .cartItems(order.getCartItem().stream().map(cartItemMapper::mapCartItemToCartItemResponse).collect(Collectors.toList()))
+                .cartItems(order.getCartItem()
+                        .stream()
+                        .map(cartItemMapper::mapCartItemToCartItemResponse)
+                        .collect(Collectors.toList()))
+                .creationDate(order.getCreationDate())
                 .build();
     }
 

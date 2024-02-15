@@ -22,10 +22,6 @@ public class CartController {
     private final CartItemService cartItemService;
 
 
-    @PostMapping("/save")
-    public ResponseEntity<ResponseMessage<CartResponse>> saveCart(@RequestBody @Valid CartRequest cartRequest){
-        return ResponseEntity.ok(cartService.saveCart(cartRequest));
-    }
 
 
     @GetMapping("/getByCustomerId/{customerId")

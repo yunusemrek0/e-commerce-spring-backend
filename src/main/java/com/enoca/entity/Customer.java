@@ -6,10 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_customer")
-public class Customer extends BaseEntity{
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +38,10 @@ public class Customer extends BaseEntity{
     @OneToMany(mappedBy = "customer")
     private List<Order> order;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
+
+    private LocalDateTime creationDate;
 
 
 

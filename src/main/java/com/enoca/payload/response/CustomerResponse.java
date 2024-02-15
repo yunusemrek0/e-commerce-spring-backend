@@ -1,15 +1,15 @@
 package com.enoca.payload.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.enoca.payload.response.abstractresponse.BaseAbstractResponse;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class CustomerResponse {
+@SuperBuilder
+public class CustomerResponse extends BaseAbstractResponse {
 
     private Long id;
 

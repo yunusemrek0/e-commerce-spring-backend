@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,15 +59,18 @@ public class ProductService {
     }
 
 
-    public ResponseMessage<ProductResponse> getProductByName(String name) {
-        Product product = productRepository.findByName(name).orElseThrow(
-                ()-> new ResourceNotFoundException(String.format(ErrorMessages.NOT_FOUND_PRODUCT_MESSAGE, name))
-        );
-        return ResponseMessage.<ProductResponse> builder()
-                .message(SuccessMessages.PRODUCT_FOUND)
-                .returnBody(productMapper.mapProductToProductResponse(product))
-                .httpStatus(HttpStatus.OK)
-                .build();
+    public List<ProductResponse> getProductByName(String name) {
+        List<Product> products = productRepository.getByNameContaining(name);
+
+        if (products.isEmpty()){
+            throw new ResourceNotFoundException(ErrorMessages.NOT_FOUND_PRODUCT_MESSAGE);
+        }
+
+
+        return products
+                .stream()
+                .map(productMapper::mapProductToProductResponse)
+                .collect(Collectors.toList());
     }
 
     public ResponseMessage<ProductResponse> updateProduct(ProductRequest productRequest, Long id) {

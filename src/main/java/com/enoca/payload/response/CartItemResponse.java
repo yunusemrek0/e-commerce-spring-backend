@@ -1,13 +1,17 @@
 package com.enoca.payload.response;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.enoca.payload.response.abstractresponse.BaseAbstractResponse;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
-public class CartItemResponse {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class CartItemResponse extends BaseAbstractResponse {
 
 
     private Long id;

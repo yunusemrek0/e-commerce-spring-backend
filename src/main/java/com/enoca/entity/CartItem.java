@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "t_cart_item")
-public class CartItem extends BaseEntity{
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,8 @@ public class CartItem extends BaseEntity{
     private Order order;
 
     private Double productPrice;
+
+    private LocalDateTime creationDate;
 
 
 

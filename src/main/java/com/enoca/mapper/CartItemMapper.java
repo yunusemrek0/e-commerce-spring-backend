@@ -18,6 +18,7 @@ public class CartItemMapper {
                 .quantity(cartItemRequest.getQuantity())
                 .cart(cart)
                 .product(product)
+                .creationDate(cartItemRequest.getCreationDate())
                 .build();
 
     }
@@ -29,6 +30,7 @@ public class CartItemMapper {
                 .quantity(cartItem.getQuantity())
                 .productName(cartItem.getProduct().getName())
                 .productPrice(cartItem.getProductPrice())
+                .creationDate(cartItem.getCreationDate())
                 .build();
     }
 }

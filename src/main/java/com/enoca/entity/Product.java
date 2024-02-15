@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "t_product")
-public class Product extends BaseEntity{
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,7 @@ public class Product extends BaseEntity{
 
     private Integer stockQuantity;
 
-    private Boolean isInStock;
+    private LocalDateTime creationDate;
 
 
 

@@ -1,21 +1,19 @@
 package com.enoca.payload.request;
 
-import com.enoca.entity.Customer;
-import com.enoca.entity.Order;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import com.enoca.payload.request.abstractrequest.BaseAbstractRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.List;
 
-@Builder
-@Data
+
+@SuperBuilder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartRequest {
+public class CartRequest extends BaseAbstractRequest {
 
     @NotNull
     private Long customerId;

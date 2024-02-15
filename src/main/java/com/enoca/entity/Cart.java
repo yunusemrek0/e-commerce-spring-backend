@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -18,21 +19,23 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_cart")
-public class Cart extends BaseEntity{
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Customer customer;
 
     @OneToMany(mappedBy = "cart")
     private List<CartItem> cartItem;
 
     private Double totalPriceInCart;
+
+    private LocalDateTime creationDate;
 
 
 

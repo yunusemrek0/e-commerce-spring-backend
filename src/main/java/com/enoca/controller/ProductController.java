@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -40,8 +41,8 @@ public class ProductController {
 
     // get product by name
     @GetMapping("/getProductByName") // http://localhost:8080/products/getProductByName?name=Shoes
-    public ResponseMessage<ProductResponse> getProductByName(@RequestParam String name) {
-        return productService.getProductByName(name);
+    public ResponseEntity<List<ProductResponse>> getProductByName(@RequestParam String name) {
+        return ResponseEntity.ok(productService.getProductByName(name));
     }
 
     // update product

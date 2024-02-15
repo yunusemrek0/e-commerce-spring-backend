@@ -16,7 +16,10 @@ public class CartMapper {
 
 
     public Cart mapCartRequestToCart(CartRequest cartRequest){
-        return null;
+        return Cart.builder()
+                .totalPriceInCart(0.00)
+                .creationDate(cartRequest.getCreationDate())
+                .build();
 
     }
 
@@ -30,6 +33,7 @@ public class CartMapper {
                         .stream()
                         .map(cartItemMapper::mapCartItemToCartItemResponse)
                         .collect(Collectors.toList()))
+                .creationDate(cart.getCreationDate())
                 .build();
     }
 }

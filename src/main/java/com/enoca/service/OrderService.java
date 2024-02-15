@@ -42,13 +42,15 @@ public class OrderService {
         Customer customer = customerService.existsById(orderRequest.getCustomerId());
 
         List<CartItem> cartItems = cartItemService.getByCartId(customer.getCart().getId());
-        cartItems.forEach(cartItem -> cartItem.setProductPrice(cartItem.getProduct().getPrice()));
+        cartItems.forEach(
+                cartItem -> cartItem.setProductPrice(cartItem.getProduct().getPrice()
+                ));
 
         productService.isAvaliableForSale(cartItems);
 
         String code =uniqueCodeMaker(customer.getId());
 
-        Order order = orderMapper.mapOrderRequestToOrder(customer,cartItems,code);
+        Order order = orderMapper.mapOrderRequestToOrder(orderRequest,customer,cartItems,code);
 
         Order savedOrder = orderRepository.save(order);
 
@@ -90,11 +92,14 @@ public class OrderService {
 
     public List<OrderResponse> getByCustomerId(Long customerId) {
 
-        Customer customer = customerService.existsById(customerId);
+        customerService.existsById(customerId);
 
         List<Order> orders = orderRepository.getByCustomerId(customerId);
 
-        return orders.stream().map(orderMapper::mapOrderToOrderResponse).collect(Collectors.toList());
+        return orders
+                .stream()
+                .map(orderMapper::mapOrderToOrderResponse)
+                .collect(Collectors.toList());
 
 
     }
