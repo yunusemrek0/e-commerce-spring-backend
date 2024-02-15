@@ -12,6 +12,7 @@ import com.enoca.payload.request.ProductRequest;
 import com.enoca.payload.response.ProductResponse;
 import com.enoca.payload.response.ResponseMessage;
 import com.enoca.repository.ProductRepository;
+import com.enoca.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,7 +30,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-
+    private final ProductHelper productHelper;
     public ResponseMessage<ProductResponse> createProduct(ProductRequest productRequest) {
         String name = productRequest.getName();
         boolean isExistsName = productRepository.existsByName(name);
@@ -70,7 +71,7 @@ public class ProductService {
 
     public ResponseMessage<ProductResponse> updateProduct(ProductRequest productRequest, Long id) {
         //check product if really exist
-        Product product = existById(id);
+        Product product =productHelper.existById(id);
         boolean isExistsName = productRepository.existsByName(productRequest.getName());
         boolean areNamesSame = Objects.equals(productRequest.getName(), product.getName());
         if (isExistsName && !areNamesSame){
@@ -89,15 +90,10 @@ public class ProductService {
                 .build();
     }
 
-    public Product existById(Long id){
-        return productRepository.findById(id).orElseThrow(
-                ()-> new ResourceNotFoundException(String.format(ErrorMessages.NOT_FOUND_PRODUCT_ID_MESSAGE, id))
-        );
-    }
 
 
     public String deleteProductById(Long id) {
-        existById(id);
+        productHelper.existById(id);
         productRepository.deleteById(id);
         return SuccessMessages.PRODUCT_DELETE;
     }
@@ -105,7 +101,7 @@ public class ProductService {
     public void decreasingProductQuantity(List<CartItem> cartItems){
 
         for (CartItem cartItem:cartItems){
-            Product product = existById(cartItem.getProduct().getId());
+            Product product = productHelper.existById(cartItem.getProduct().getId());
             Integer quantity = product.getStockQuantity();
             Integer sold = cartItem.getQuantity();
             product.setStockQuantity(quantity-sold);

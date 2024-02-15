@@ -11,6 +11,7 @@ import com.enoca.payload.response.CartItemResponse;
 import com.enoca.payload.response.ResponseMessage;
 import com.enoca.repository.CartItemRepository;
 import com.enoca.repository.CartRepository;
+import com.enoca.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +28,12 @@ public class CartItemService {
     private final CartItemMapper cartItemMapper;
     private final CartService cartService;
     private final CartRepository cartRepository;
+    private final ProductHelper productHelper;
 
 
     public ResponseMessage<CartItemResponse> saveCartItem(CartItemRequest cartItemRequest,Long cartId) {
 
-        Product product = productService.existById(cartItemRequest.getProductId());
+        Product product = productHelper.existById(cartItemRequest.getProductId());
         Cart cart = cartService.existById(cartId);
 
         CartItem cartItem = cartItemMapper
@@ -105,13 +107,5 @@ public class CartItemService {
         }
     }
 
-    public List<CartItem> getByOrderId(Long orderId){
-        return cartItemRepository.getByOrderId(orderId);
-    }
 
-
-    public List<CartItem> getByOrderIdSet(Set<Long> orderIds) {
-
-        return cartItemRepository.getByOrderIdSet(orderIds);
-    }
 }

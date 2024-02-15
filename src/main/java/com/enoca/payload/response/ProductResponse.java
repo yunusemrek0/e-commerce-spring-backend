@@ -17,6 +17,5 @@ public class ProductResponse {
 
     private Integer stockQuantity;
 
-    //private boolean isInStock;
 
 }

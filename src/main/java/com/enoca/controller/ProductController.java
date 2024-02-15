@@ -1,21 +1,17 @@
 package com.enoca.controller;
 
-import com.enoca.entity.Product;
-import com.enoca.payload.request.CustomerRequest;
+
 import com.enoca.payload.request.ProductRequest;
-import com.enoca.payload.response.CustomerResponse;
 import com.enoca.payload.response.ProductResponse;
 import com.enoca.payload.response.ResponseMessage;
 import com.enoca.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/products")
@@ -58,7 +54,7 @@ public class ProductController {
 
     // delete product
     @DeleteMapping("/deleteProduct/{id}") // http://localhost:8080/products/deleteProduct/1 + DELETE
-    public ResponseEntity<String> deleteProductByName(@PathVariable Long id){
+    public ResponseEntity<String> deleteProductById(@PathVariable Long id){
         return ResponseEntity.ok(productService.deleteProductById(id));
     }
 

@@ -1,8 +1,5 @@
 package com.enoca.payload.response;
 
-import com.enoca.entity.CartItem;
-import com.enoca.entity.Customer;
-import com.enoca.entity.Order;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

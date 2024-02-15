@@ -41,6 +41,7 @@ public class CustomerService {
     }
 
 
+    //add helper
     public Customer existsById(Long id){
         return customerRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException(String.format(ErrorMessages.NOT_FOUND_CUSTOMER_ID,id))

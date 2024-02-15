@@ -14,8 +14,4 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     @Query("SELECT c FROM CartItem c WHERE c.cart.id=?1 AND c.order IS NULL")
     List<CartItem> getByCartIdAndOrderNull(Long cartId);
 
-    List<CartItem> getByOrderId(Long orderId);
-
-    @Query("SELECT c FROM CartItem c WHERE c.order.id IN :orderIds")
-    List<CartItem> getByOrderIdSet(@Param("orderIds") Set<Long> orderIds);
 }

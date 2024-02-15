@@ -1,7 +1,6 @@
 package com.enoca.payload.response;
 
 
-import com.enoca.entity.CartItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

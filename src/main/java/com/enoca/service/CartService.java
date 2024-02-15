@@ -17,6 +17,7 @@ import com.enoca.payload.response.ResponseMessage;
 import com.enoca.repository.CartItemRepository;
 import com.enoca.repository.CartRepository;
 import com.enoca.repository.CustomerRepository;
+import com.enoca.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class CartService {
     private final ProductService productService;
     private final CartItemMapper cartItemMapper;
     private final CartItemRepository cartItemRepository;
-
+    private final ProductHelper productHelper;
 
 
     public ResponseMessage<CartResponse> saveCart(CartRequest cartRequest) {
@@ -61,7 +62,7 @@ public class CartService {
 
     }
 
-
+    //add helper
     public Cart existById(Long id){
         return cartRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException(String.format(ErrorMessages.NOT_FOUND_CART_ID,id))
@@ -80,7 +81,7 @@ public class CartService {
 
     public ResponseMessage<CartItemResponse> addCartItemToCart(Long cartId, CartItemRequest cartItemRequest) {
         Cart cart = existById(cartId);
-        Product product = productService.existById(cartItemRequest.getProductId());
+        Product product = productHelper.existById(cartItemRequest.getProductId());
 
         CartItem cartItem = cartItemMapper.mapCartItemRequestToCartItem(cartItemRequest,product,cart);
 
@@ -100,7 +101,7 @@ public class CartService {
 
 
     }
-
+    //add helper
     public Double cartTotalPriceCalculator(List<CartItem> cartItems){
 
         double totalPrice=0.0;
@@ -135,11 +136,4 @@ public class CartService {
         return SuccessMessages.CART_ITEM_REMOVED;
     }
 
-    public void makeEmptyCartAfterOrder(Long cartId){
-        Cart cart = existById(cartId);
-        List<CartItem> cartItems = new ArrayList<>();
-
-        cart.setCartItem(cartItems);
-        cartRepository.save(cart);
-    }
 }

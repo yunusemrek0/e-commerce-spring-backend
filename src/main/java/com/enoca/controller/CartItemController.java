@@ -1,9 +1,7 @@
 package com.enoca.controller;
 
 import com.enoca.payload.request.CartItemRequest;
-import com.enoca.payload.request.ProductRequest;
 import com.enoca.payload.response.CartItemResponse;
-import com.enoca.payload.response.ProductResponse;
 import com.enoca.payload.response.ResponseMessage;
 import com.enoca.service.CartItemService;
 import lombok.RequiredArgsConstructor;

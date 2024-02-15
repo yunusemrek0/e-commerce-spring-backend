@@ -1,12 +1,10 @@
 package com.enoca.payload.response;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @SuperBuilder
 public class CartItemResponse {

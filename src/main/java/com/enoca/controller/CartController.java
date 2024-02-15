@@ -1,6 +1,5 @@
 package com.enoca.controller;
 
-import com.enoca.entity.Cart;
 import com.enoca.payload.request.CartItemRequest;
 import com.enoca.payload.request.CartRequest;
 import com.enoca.payload.response.CartItemResponse;
