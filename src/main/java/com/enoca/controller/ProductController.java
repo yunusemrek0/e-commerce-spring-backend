@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
 
     //create product
-    @PostMapping("/createProduct") //http://localhost:8080/products/createProduct
-    public ResponseEntity<ResponseMessage<ProductResponse>> createProduct(
+    @PostMapping("/save") //http://localhost:8080/product/save
+    public ResponseEntity<ResponseMessage<ProductResponse>> saveProduct(
             @RequestBody @Valid ProductRequest productRequest){
-        return ResponseEntity.ok(productService.createProduct(productRequest));
+        return ResponseEntity.ok(productService.saveProduct(productRequest));
     }
 
     // get all products by page
@@ -45,6 +45,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductByName(name));
     }
 
+    @GetMapping("/getProductById/{id}") // http://localhost:8080/products/getProductByName?name=Shoes
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
+
     // update product
     @PutMapping("/updateProduct/{id}") // http://localhost:8080/products/updateProduct/2 + PUT
     public ResponseMessage<ProductResponse>updateProduct(
@@ -57,6 +62,11 @@ public class ProductController {
     @DeleteMapping("/deleteProduct/{id}") // http://localhost:8080/products/deleteProduct/1 + DELETE
     public ResponseEntity<String> deleteProductById(@PathVariable Long id){
         return ResponseEntity.ok(productService.deleteProductById(id));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ProductResponse>> getAll(){
+        return ResponseEntity.ok(productService.getAll());
     }
 
 

@@ -32,7 +32,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ProductHelper productHelper;
-    public ResponseMessage<ProductResponse> createProduct(ProductRequest productRequest) {
+    public ResponseMessage<ProductResponse> saveProduct(ProductRequest productRequest) {
         String name = productRequest.getName();
         boolean isExistsName = productRepository.existsByName(name);
         if (isExistsName){
@@ -124,4 +124,11 @@ public class ProductService {
     }
 
 
+    public ProductResponse getProductById(Long id) {
+        return productMapper.mapProductToProductResponse(productHelper.existById(id));
+    }
+
+    public List<ProductResponse> getAll() {
+        return productRepository.findAll().stream().map(productMapper::mapProductToProductResponse).collect(Collectors.toList());
+    }
 }

@@ -14,6 +14,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class ProductResponse extends BaseAbstractResponse {
 
+    private Long id;
+
     private String name;
 
     private Double price;

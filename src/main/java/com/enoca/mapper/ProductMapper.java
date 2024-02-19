@@ -14,18 +14,10 @@ import java.time.LocalDateTime;
 public class ProductMapper {
 
     public ProductResponse mapProductToProductResponse(Product product){
-        /*
-        ProductResponse productResponse = new ProductResponse();
 
-        productResponse.setName(product.getName());
-        productResponse.setPrice(product.getPrice());
-        productResponse.setStockQuantity(product.getStockQuantity());
-
-        return productResponse;
-
-         */
 
         return ProductResponse.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
                 .stockQuantity(product.getStockQuantity())
